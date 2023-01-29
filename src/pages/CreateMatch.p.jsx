@@ -1,5 +1,5 @@
 import { Container, Box, Button, Typography, Alert } from '@mui/material';
-import GenerateMatch from '../components/test';
+import FormWords from '../components/formWords';
 import Moment from 'moment';
 import {
   Delete as DeleteIcon,
@@ -83,14 +83,7 @@ const CreateMatch = () => {
 
   return (
     <Container>
-      <GenerateMatch
-        words={words}
-        setWords={setWords}
-        handleForm={(e) => {
-          e.preventDefault();
-          console.log(words);
-        }}
-      />
+      <FormWords words={words} setWords={setWords} />
       <Box>
         {exportState === 'done' ? (
           <Button
