@@ -1,39 +1,16 @@
 import { Container, Box, Button, Typography, Alert } from '@mui/material';
 import FormWords from '../components/formWords';
-import Moment from 'moment';
-import {
-  Delete as DeleteIcon,
-  Replay as ReplayIcon,
-} from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import ExportWords from '../components/exportWords';
+import { Replay as ReplayIcon } from '@mui/icons-material';
+import { useWords } from '../contexts/words';
 import { useState } from 'react';
 const CreateMatch = () => {
-  const [words, setWords] = useState([
-    {
-      q: '',
-      a: '',
-    },
-  ]);
-  const [exportState, setExportState] = useState('done');
+  const [words, setWords] = useWords();
   const [importState, setImportState] = useState({
     status: 'done',
     text: 'Ready',
   });
-  const ExportWords = () => {
-    // export the words to a json file and download it
-    setExportState('loading');
-    const wordsJSON = JSON.stringify(words);
-    const blob = new Blob([wordsJSON], { type: 'application/json' });
-    // await 5 seconds
-    const url = URL.createObjectURL(blob);
-    setExportState(['download', url].join(','));
-  };
-  const DownloadBlob = () => {
-    const link = document.createElement('a');
-    link.href = exportState.split(',')[1];
-    link.download = `Palabras-${Moment().format('L')}.json`;
-    link.click();
-    setExportState('done');
-  };
   const ImportWords = () => {
     // import the words from a json file and then set the words
     const input = document.createElement('input');
@@ -84,26 +61,7 @@ const CreateMatch = () => {
   return (
     <Container>
       <FormWords words={words} setWords={setWords} />
-      <Box>
-        {exportState === 'done' ? (
-          <Button
-            onClick={ExportWords}
-            disabled={words.length === 0 || words.length <= 1}
-          >
-            Exportar Palabras
-          </Button>
-        ) : exportState === 'loading' ? (
-          <Button disabled>Exportando...</Button>
-        ) : null}
-        {exportState.includes(',') ? (
-          <>
-            <Button onClick={DownloadBlob}>Descargar archivo</Button>
-            <Button onClick={() => setExportState('done')}>
-              <DeleteIcon />
-            </Button>
-          </>
-        ) : null}
-      </Box>
+      <ExportWords words={words} />
       <Box>
         {importState.status === 'done' ? (
           <Button onClick={ImportWords}>Importar palabras</Button>
@@ -136,6 +94,11 @@ const CreateMatch = () => {
               </Button>
             </Typography>
           </Alert>
+        ) : null}
+        {!(words.length === 0 || words.length <= 1) ? (
+          <Button component={Link} to="/match">
+            <Typography>crear la partida</Typography>
+          </Button>
         ) : null}
       </Box>
     </Container>

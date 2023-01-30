@@ -5,7 +5,7 @@ const NoPage = () => {
   return (
     <Container>
       <Box>
-        <Typography>404</Typography>
+        <Typography variant="h1">404 no page</Typography>
       </Box>
     </Container>
   );
