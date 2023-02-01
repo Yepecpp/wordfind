@@ -1,27 +1,10 @@
-import {
-  Container,
-  Box,
-  Button,
-  Typography,
-  Paper,
-  Select,
-  MenuItem,
-} from '@mui/material';
+import { Container, Box, Button, Typography, Paper } from '@mui/material';
 import { useTimer } from 'react-timer-hook';
-import { useState } from 'react';
-import { useWords } from '../contexts/words';
+import { useMatch } from '../contexts/match';
 import ExportWords from '../components/exportWords';
 import Wordlist from '../components/wordlist';
 const Match = () => {
-  const [words] = useWords();
-  const [Match, setMatch] = useState({
-    status: 'ready',
-    points: 0,
-    remaningTime: 0,
-    finishTime: 1 * 60 * 1000,
-    startTime: new Date(),
-    words: words.map((word) => ({ q: word.q, a: word.a, isGuessed: false })),
-  });
+  const [Match, setMatch] = useMatch();
   const setMatchWords = (words) => {
     setMatch({
       ...Match,
@@ -39,12 +22,15 @@ const Match = () => {
       remaningTime: Match.finishTime - (new Date() - Match.startTime),
       points: Match.words.filter((word) => word.isGuessed).length,
       words: Match.words,
+      size: Match.size,
     });
   };
   const timerHook = useTimer({
-    expiryTimestamp: new Date().getSeconds() + 600,
+    expiryTimestamp: new Date().setMilliseconds(Match.remaningTime),
     onExpire: EndMatch,
+    autoStart: false,
   });
+
   const StartMatch = () => {
     if (!Match.finishTime) return;
     const newMatch = {
@@ -54,9 +40,9 @@ const Match = () => {
       remaningTime: null,
       points: 0,
       words: Match.words,
+      size: Match.size,
     };
-    timerHook.start();
-    console.log(timerHook);
+    timerHook.start(newMatch.finishTime - (new Date() - newMatch.startTime));
     setMatch(newMatch);
   };
 
@@ -67,8 +53,14 @@ const Match = () => {
       finishTime: Match.finishTime,
       remaningTime: 0,
       startTime: null,
-      words: words.map((word) => ({ q: word.q, a: word.a, isGuessed: false })),
+      words: Match.words.map((word) => ({
+        q: word.q,
+        a: word.a,
+        isGuessed: false,
+      })),
+      size: Match.size,
     });
+    timerHook.pause();
   };
 
   return (
@@ -89,27 +81,14 @@ const Match = () => {
           >
             Empezar
           </Button>
-          <Select
-            value={Match.finishTime / 60 / 1000}
-            onChange={(e) => {
-              setMatch({
-                ...Match,
-                finishTime: e.target.value * 60 * 1000,
-              });
-            }}
-            error={!Match.finishTime}
-          >
-            <MenuItem value={1}>1 minuto</MenuItem>
-            <MenuItem value={2}>2 minutos</MenuItem>
-            <MenuItem value={3}>3 minutos</MenuItem>
-            <MenuItem value={5}>5 minutos</MenuItem>
-            <MenuItem value={10}>10 minutos</MenuItem>
-            <MenuItem value={15}>15 minutos</MenuItem>
-          </Select>
         </>
       ) : (
         <>
-          <Wordlist words={Match.words} setWords={setMatchWords} />
+          <Wordlist
+            words={Match.words}
+            setWords={setMatchWords}
+            size={Match.size}
+          />
           {Match.status !== 'ended' ? (
             <>
               <Button onClick={() => EndMatch()}>Terminar</Button>
@@ -162,7 +141,7 @@ const Match = () => {
           </Paper>
         ))}
       </Box>
-      <ExportWords words={words} />
+      <ExportWords words={Match.words} />
     </Container>
   );
 };

@@ -8,10 +8,10 @@ import Match from './pages/Match.p';
 import CreateMatch from './pages/CreateMatch.p';
 import NoPage from './pages/NoPage.p';
 import GameRoutes from './components/routes/match.routes';
-import { WordsProvider } from './contexts/words.jsx';
+import { MatchProvider } from './contexts/match';
 const App = () => {
   return (
-    <WordsProvider>
+    <MatchProvider>
       <Router>
         <Switch>
           <Route element={<GameRoutes />}>
@@ -22,7 +22,7 @@ const App = () => {
           <Route path="*" element={<NoPage />} />
         </Switch>
       </Router>
-    </WordsProvider>
+    </MatchProvider>
   );
 };
 

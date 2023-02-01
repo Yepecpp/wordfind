@@ -1,12 +1,25 @@
-import { Container, Box, Button, Typography, Alert } from '@mui/material';
+import {
+  Container,
+  Box,
+  Button,
+  Typography,
+  Alert,
+  Select,
+  MenuItem,
+  Input,
+} from '@mui/material';
 import FormWords from '../components/formWords';
 import { Link } from 'react-router-dom';
 import ExportWords from '../components/exportWords';
 import { Replay as ReplayIcon } from '@mui/icons-material';
-import { useWords } from '../contexts/words';
-import { useState } from 'react';
+import { useMatch } from '../contexts/match';
+import { useEffect, useState } from 'react';
 const CreateMatch = () => {
-  const [words, setWords] = useWords();
+  const [match, setMatch] = useMatch();
+  const [words, setWords] = useState(match.words);
+  useEffect(() => {
+    setMatch({ ...match, words });
+  }, [words]);
   const [importState, setImportState] = useState({
     status: 'done',
     text: 'Ready',
@@ -60,6 +73,38 @@ const CreateMatch = () => {
 
   return (
     <Container>
+      <Select
+        value={match.finishTime / 60 / 1000}
+        onChange={(e) => {
+          setMatch({
+            ...match,
+            finishTime: e.target.value * 60 * 1000,
+          });
+        }}
+        error={!match.finishTime}
+      >
+        <MenuItem value={1}>1 minuto</MenuItem>
+        <MenuItem value={2}>2 minutos</MenuItem>
+        <MenuItem value={3}>3 minutos</MenuItem>
+        <MenuItem value={5}>5 minutos</MenuItem>
+        <MenuItem value={10}>10 minutos</MenuItem>
+        <MenuItem value={15}>15 minutos</MenuItem>
+      </Select>
+      <Input
+        type="number"
+        value={match.size.rows}
+        onChange={(e) => {
+          setMatch({
+            ...match,
+            size: {
+              cols: Number(e.target.value),
+              rows: Number(e.target.value),
+            },
+          });
+        }}
+        error={!match.size.rows}
+      />
+
       <FormWords words={words} setWords={setWords} />
       <ExportWords words={words} />
       <Box>
@@ -95,7 +140,7 @@ const CreateMatch = () => {
             </Typography>
           </Alert>
         ) : null}
-        {!(words.length === 0 || words.length <= 1) ? (
+        {!(words.length === 0 || words.length <= 1) && match.finishTime ? (
           <Button component={Link} to="/match">
             <Typography>crear la partida</Typography>
           </Button>
