@@ -21,12 +21,11 @@ const validationSchema = yup.array(
       .required('Ingrese una respuesta'),
   })
 );
-const generateMatch = ({ words, setWords }) => {
+const formWords = ({ words, setWords }) => {
   const formikHook = useFormik({
     initialValues: words,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       setWords(values);
     },
   });
@@ -105,8 +104,8 @@ const generateMatch = ({ words, setWords }) => {
     </Formik>
   );
 };
-generateMatch.propTypes = {
+formWords.propTypes = {
   words: propTypes.array.isRequired,
   setWords: propTypes.func.isRequired,
 };
-export default generateMatch;
+export default formWords;

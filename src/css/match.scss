@@ -5,6 +5,7 @@
   align-items: center;
   font-size: 1.5em;
   border: 2px solid #000;
+  user-select: none;
 }
 .wordlist-row {
   display: flex;
@@ -29,4 +30,12 @@
   padding: 0;
   list-style: none;
   text-align: center;
+}
+.selected {
+  background-color: #000;
+  color: #fff;
+}
+.found {
+  background-color: #0f0;
+  color: #000;
 }

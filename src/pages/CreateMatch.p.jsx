@@ -93,6 +93,7 @@ const CreateMatch = () => {
       <Input
         type="number"
         value={match.size.rows}
+        placeholder="Tamaño del tablero"
         onChange={(e) => {
           setMatch({
             ...match,
@@ -102,9 +103,17 @@ const CreateMatch = () => {
             },
           });
         }}
-        error={!match.size.rows}
+        error={
+          !match.size.rows ||
+          !match.size.cols ||
+          match.size.rows < match.words.length ||
+          match.size.rows < // cant be smaller than the longest word in the list
+            Math.max(...match.words.map((word) => word.q.length))
+        }
       />
-
+      <Typography>
+        El tamaño del tablero es {match.size.rows}x{match.size.cols}
+      </Typography>
       <FormWords words={words} setWords={setWords} />
       <ExportWords words={words} />
       <Box>
@@ -140,9 +149,17 @@ const CreateMatch = () => {
             </Typography>
           </Alert>
         ) : null}
-        {!(words.length === 0 || words.length <= 1) && match.finishTime ? (
+        {!(words.length === 0 || words.length <= 1) &&
+        match.finishTime &&
+        !(
+          !match.size.rows ||
+          !match.size.cols ||
+          match.size.rows < match.words.length ||
+          match.size.rows < // cant be smaller than the longest word in the list
+            Math.max(...match.words.map((word) => word.q.length))
+        ) ? (
           <Button component={Link} to="/match">
-            <Typography>crear la partida</Typography>
+            <Typography>Crear la partida</Typography>
           </Button>
         ) : null}
       </Box>
