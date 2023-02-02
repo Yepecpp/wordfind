@@ -1,0 +1,41 @@
+.wordlist-grid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 1.5em;
+  border: 2px solid #000;
+  user-select: none;
+}
+.wordlist-row {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid#000;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wordlist-cell {
+  width: 100%;
+  flex: 1;
+  border: 1px solid #000;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+.selected {
+  background-color: #000;
+  color: #fff;
+}
+.found {
+  background-color: #0f0;
+  color: #000;
+}

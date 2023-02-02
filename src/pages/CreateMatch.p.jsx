@@ -1,39 +1,29 @@
-import { Container, Box, Button, Typography, Alert } from '@mui/material';
-import FormWords from '../components/formWords';
-import Moment from 'moment';
 import {
-  Delete as DeleteIcon,
-  Replay as ReplayIcon,
-} from '@mui/icons-material';
-import { useState } from 'react';
+  Container,
+  Box,
+  Button,
+  Typography,
+  Alert,
+  Select,
+  MenuItem,
+  Input,
+} from '@mui/material';
+import FormWords from '../components/formWords';
+import { Link } from 'react-router-dom';
+import ExportWords from '../components/exportWords';
+import { Replay as ReplayIcon } from '@mui/icons-material';
+import { useMatch } from '../contexts/match';
+import { useEffect, useState } from 'react';
 const CreateMatch = () => {
-  const [words, setWords] = useState([
-    {
-      q: '',
-      a: '',
-    },
-  ]);
-  const [exportState, setExportState] = useState('done');
+  const [match, setMatch] = useMatch();
+  const [words, setWords] = useState(match.words);
+  useEffect(() => {
+    setMatch({ ...match, words });
+  }, [words]);
   const [importState, setImportState] = useState({
     status: 'done',
     text: 'Ready',
   });
-  const ExportWords = () => {
-    // export the words to a json file and download it
-    setExportState('loading');
-    const wordsJSON = JSON.stringify(words);
-    const blob = new Blob([wordsJSON], { type: 'application/json' });
-    // await 5 seconds
-    const url = URL.createObjectURL(blob);
-    setExportState(['download', url].join(','));
-  };
-  const DownloadBlob = () => {
-    const link = document.createElement('a');
-    link.href = exportState.split(',')[1];
-    link.download = `Palabras-${Moment().format('L')}.json`;
-    link.click();
-    setExportState('done');
-  };
   const ImportWords = () => {
     // import the words from a json file and then set the words
     const input = document.createElement('input');
@@ -83,27 +73,49 @@ const CreateMatch = () => {
 
   return (
     <Container>
+      <Select
+        value={match.finishTime / 60 / 1000}
+        onChange={(e) => {
+          setMatch({
+            ...match,
+            finishTime: e.target.value * 60 * 1000,
+          });
+        }}
+        error={!match.finishTime}
+      >
+        <MenuItem value={1}>1 minuto</MenuItem>
+        <MenuItem value={2}>2 minutos</MenuItem>
+        <MenuItem value={3}>3 minutos</MenuItem>
+        <MenuItem value={5}>5 minutos</MenuItem>
+        <MenuItem value={10}>10 minutos</MenuItem>
+        <MenuItem value={15}>15 minutos</MenuItem>
+      </Select>
+      <Input
+        type="number"
+        value={match.size.rows}
+        placeholder="Tamaño del tablero"
+        onChange={(e) => {
+          setMatch({
+            ...match,
+            size: {
+              cols: Number(e.target.value),
+              rows: Number(e.target.value),
+            },
+          });
+        }}
+        error={
+          !match.size.rows ||
+          !match.size.cols ||
+          match.size.rows < match.words.length ||
+          match.size.rows < // cant be smaller than the longest word in the list
+            Math.max(...match.words.map((word) => word.q.length))
+        }
+      />
+      <Typography>
+        El tamaño del tablero es {match.size.rows}x{match.size.cols}
+      </Typography>
       <FormWords words={words} setWords={setWords} />
-      <Box>
-        {exportState === 'done' ? (
-          <Button
-            onClick={ExportWords}
-            disabled={words.length === 0 || words.length <= 1}
-          >
-            Exportar Palabras
-          </Button>
-        ) : exportState === 'loading' ? (
-          <Button disabled>Exportando...</Button>
-        ) : null}
-        {exportState.includes(',') ? (
-          <>
-            <Button onClick={DownloadBlob}>Descargar archivo</Button>
-            <Button onClick={() => setExportState('done')}>
-              <DeleteIcon />
-            </Button>
-          </>
-        ) : null}
-      </Box>
+      <ExportWords words={words} />
       <Box>
         {importState.status === 'done' ? (
           <Button onClick={ImportWords}>Importar palabras</Button>
@@ -136,6 +148,19 @@ const CreateMatch = () => {
               </Button>
             </Typography>
           </Alert>
+        ) : null}
+        {!(words.length === 0 || words.length <= 1) &&
+        match.finishTime &&
+        !(
+          !match.size.rows ||
+          !match.size.cols ||
+          match.size.rows < match.words.length ||
+          match.size.rows < // cant be smaller than the longest word in the list
+            Math.max(...match.words.map((word) => word.q.length))
+        ) ? (
+          <Button component={Link} to="/match">
+            <Typography>Crear la partida</Typography>
+          </Button>
         ) : null}
       </Box>
     </Container>
