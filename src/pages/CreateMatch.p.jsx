@@ -99,8 +99,8 @@ const CreateMatch = () => {
         <MenuItem value={15}>15 minutos</MenuItem>
       </Select>
       <input className='tamañoTableroInput'
-      min={"4"}
-      max={"100"}
+      min={"8"}
+      max={"15"}
       type="number"
       value={match.size.rows}
       placeholder="Tamaño del tablero"
@@ -183,7 +183,7 @@ const CreateMatch = () => {
           Math.max(...match.words.map((word) => word.q.length))
           ) ? (
             <Link to ="/match">
-          <button className='matchButton'>
+          <button className='createButton'>
             <p>Crear la partida</p>
           </button>
           </Link>

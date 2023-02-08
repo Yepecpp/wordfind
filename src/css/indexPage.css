@@ -45,9 +45,15 @@
     height: 3rem;
     font-size: 1rem;
     font-weight: 750;
-    background-color:transparent;
-    box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
-    border-radius: .5rem;
-    border: 1px solid black;
+    border-radius: .2rem;
+    background-color: transparent;
+    border: 1px solid #c8c8c8;
     cursor: pointer;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.createButton:hover{
+    background-color: gray;
 }

@@ -2,6 +2,7 @@ import { Container, Box, Button, Typography, Paper } from '@mui/material';
 import { useTimer } from 'react-timer-hook';
 import { useMatch } from '../contexts/match';
 import ExportWords from '../components/exportWords';
+import "../css/match.css"
 import Wordlist from '../components/wordlist';
 const Match = () => {
   const [Match, setMatch] = useMatch();
@@ -89,7 +90,27 @@ const Match = () => {
   };
 
   return (
-    <Container>
+    <Container className='matchContainer'>
+       <Box className="preguntasyrespuestas"
+       
+      >
+        <Typography variant="h5">Palabras</Typography>
+        {Match.words?.map((word, i) => (
+          <Paper
+            key={i}
+            elevation={3}
+            sx={{
+              margin: '1rem',
+              padding: '8px',
+            }}
+          >
+            <Typography variant="h5">Q: {word.q}</Typography>
+            {word.isGuessed ? (
+              <Typography variant="h5">A: {word.a}</Typography>
+            ) : null}
+          </Paper>
+        ))}
+      </Box>
       <Box>
         <Typography variant="h4">Match</Typography>
       </Box>
@@ -154,28 +175,7 @@ const Match = () => {
             : timerHook.seconds + ' segundos'
           : ' Game Over'}
       </Typography>
-      <Box
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        bgcolor={'red'}
-      >
-        <Typography variant="h5">Palabras</Typography>
-        {Match.words?.map((word, i) => (
-          <Paper
-            key={i}
-            elevation={22}
-            sx={{
-              margin: '1rem',
-            }}
-          >
-            <Typography variant="h5">Q: {word.q}</Typography>
-            {word.isGuessed ? (
-              <Typography variant="h5">A: {word.a}</Typography>
-            ) : null}
-          </Paper>
-        ))}
-      </Box>
+     
 
       <ExportWords words={Match.words} />
     </Container>

@@ -1,7 +1,8 @@
 import propTypes from 'prop-types';
 import { useState, useMemo } from 'react';
 import { Typography } from '@mui/material';
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+import "../css/match.css"
+const letters = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
 const Wordlist = ({ words, setWords, size, ended = false }) => {
   const fillGrid = useMemo(() => {
     const retry = 50;
