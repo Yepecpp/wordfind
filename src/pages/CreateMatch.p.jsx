@@ -25,7 +25,6 @@ const CreateMatch = () => {
   const [words, setWords] = useState(match.words);
   useEffect(() => {
     setMatch({ ...match, words });
-    console.log(match)
   }, [words]);
   const [importState, setImportState] = useState({
     status: 'done',
