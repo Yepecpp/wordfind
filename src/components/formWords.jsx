@@ -37,7 +37,7 @@ const formWords = ({ words, setWords }) => {
     
     <Formik onSubmit={formikHook.handleSubmit}>
       <div className="entradaDePalabras">
-        <h3>Palabras: </h3>
+        <h3 className='plb'>Palabras </h3>
         <Box>
           <span className='PREncabezado'><h2>Pregunta</h2><h2>Respuesta</h2></span>
           {formikHook.values.map((word, index) => (
@@ -61,7 +61,7 @@ const formWords = ({ words, setWords }) => {
                 onChange={formikHook.handleChange}
                 name={`[${index}].q`}
                 onBlur={formikHook.handleBlur}
-                placeholder={"¿Cuantos años tiene papito poloche?"}
+                placeholder={"¿Como se apellidaba el dictador que goberno del 1930 al 1961?"}
                 error={
                   formikHook.touched[index]?.q && formikHook.errors[index]?.q
                   ? true
@@ -77,7 +77,7 @@ const formWords = ({ words, setWords }) => {
                 multiline
                 maxRows={4}
                 onChange={formikHook.handleChange}
-                placeholder={"30 viviendo y 31 jodiendo"}
+                placeholder={"Trujillo"}
                 name={`[${index}].a`}
                 onBlur={formikHook.handleBlur}
                 error={

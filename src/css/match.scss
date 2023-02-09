@@ -22,6 +22,28 @@
   list-style: none;
 }
 
+.matchTitle{
+  font-size: 4rem;
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
+  margin: 1rem;
+  border: 1px solid #c8c8c8;
+  box-shadow: 0px 1px 10px black;
+  border-radius: .2rem;
+  width: fit-content;
+  padding: 10px;
+
+}
+.gameStatus{
+  left: 50%;
+  position:relative;
+  transform: translate(-50%,0%);
+  margin: 1rem;
+  text-align: center;
+  text-transform:capitalize ;
+}
+
 .wordlist-cell {
   width: 100%;
   flex: 1;
@@ -30,11 +52,16 @@
   border: 1px solid black;
   list-style: none;
   text-align: center;
-  font-weight: 400;
+  font-weight:500;
+  color: #1B1B1B;
+  font-weight: bold;
+ 
 }
 .selected {
   background-color: #777777;
   color: #fff;
+  font-style: italic;
+
 }
 .found {
   background-color: #14ee14;
@@ -56,4 +83,8 @@
   flex-direction: row;
   margin-top: 1rem;
   align-items: center;
+  font-size: 1rem;
+  font-weight: 100;
+  
 }
+

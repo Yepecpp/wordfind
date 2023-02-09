@@ -176,7 +176,7 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
           ? 'Game Ended'
           : selected.length > 1
           ? selected.map((s) => s.letter).join('')
-          : 'Select a word from the list to find it in the grid'}
+          : 'Selecciona una letra y combinala para encontrar la respuesta'}
       </Typography>
     </div>
   );

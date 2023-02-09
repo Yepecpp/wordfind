@@ -11,10 +11,13 @@ const exportWords = ({ words }) => {
   return (
     <Box>
       {exportState === 'done' ? (
-        <Button 
+        <Button className='export'
           onClick={() => ExportWords(words, setExportState)}
           disabled={words.length < 2}
-        >
+          sx={{
+            ":disabled": {color: "initial"},
+          }}
+          >
           Exportar Palabras{' '}
           <FileDownloadOutlinedIcon
             sx={{

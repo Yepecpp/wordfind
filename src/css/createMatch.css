@@ -11,6 +11,15 @@
     flex-direction:column ;
 }
 
+.matchallcontainer{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url("../assets/background1.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 .tiempoytamaño{
     position: relative;
     display: flex;
@@ -22,14 +31,19 @@
     height: 2rem;
     align-self: center;
 }
+
+
 .tamañoTableroInput{
     width: 5rem;
+    padding: 8px;
     height: 2rem;
-    font-weight: 600;
+    font-weight: 750;
     text-align: center;
+    font-size: 1rem;
     margin: 2rem;
     border:  1px #c8c8c8 solid ;
     border-radius: .2rem;
+    background-color: transparent;
 }
 
 
@@ -41,4 +55,9 @@
 
 .importarexportar{
     display: flex;
+    
 }
+
+
+
+    

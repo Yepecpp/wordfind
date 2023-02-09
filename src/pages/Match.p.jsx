@@ -91,29 +91,47 @@ const Match = () => {
 
   return (
     <Container className='matchContainer'>
+      <Box>
+        <p className='matchTitle'>Wordfind</p>
+      </Box>
        <Box className="preguntasyrespuestas"
        
       >
-        <Typography variant="h5">Palabras</Typography>
+        <Typography variant="h5">Preguntas</Typography>
         {Match.words?.map((word, i) => (
-          <Paper
+          <Paper className="q_acontainer"
             key={i}
             elevation={3}
             sx={{
               margin: '1rem',
               padding: '8px',
+              display: "flex",
+              flexDirection: "column",
+              gap: ".5rem",
+
+            
             }}
           >
-            <Typography variant="h5">Q: {word.q}</Typography>
+            <h3><span style={{color: "#1B1B1B", fontWeight: "700", textTransform: "Capitalize" }}>P:   {word.q}</span></h3>
             {word.isGuessed ? (
-              <Typography variant="h5">A: {word.a}</Typography>
+              <h3> <span  style={{color: "#1B1B1B", fontWeight: "700", fontStyle: "italic", textTransform: "Capitalize" }}>   R: {word.a}</span></h3>
             ) : null}
           </Paper>
         ))}
       </Box>
-      <Box>
-        <Typography variant="h4">Match</Typography>
-      </Box>
+      <div  className='gameStatus'>
+      <Typography variant="h6" >
+        {Match.status === 'started'
+          ? timerHook.minutes > 0
+          ? timerHook.minutes +
+          ' minutos con ' +
+          timerHook.seconds +
+          ' segundos'
+          : timerHook.seconds + ' segundos'
+          : ' Juego Finalizado'}
+      </Typography>
+          </div>
+      
       {Match.status === 'ready' ? (
         <>
           <Button
@@ -165,16 +183,7 @@ const Match = () => {
           </Button>
         </>
       ) : null}
-      <Typography variant="h6">
-        {Match.status === 'started'
-          ? timerHook.minutes > 0
-            ? timerHook.minutes +
-              ' minutos con ' +
-              timerHook.seconds +
-              ' segundos'
-            : timerHook.seconds + ' segundos'
-          : ' Game Over'}
-      </Typography>
+      
      
 
       <ExportWords words={Match.words} />

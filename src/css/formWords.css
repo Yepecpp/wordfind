@@ -1,8 +1,11 @@
+  @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
 .entradaDePalabras{
     overflow-y: auto;
     width: 100vh;
-    height: 55vh;
+    height: 65vh;
     border: 1px solid #c8c8c8;
+    background-color: white;
     border-radius: .2rem;
     padding: 1rem;
 }
@@ -13,6 +16,14 @@
     gap: 1rem;
     margin: 1rem 1rem 1rem .5rem;
 
+}
+.plb{
+    font-size: 3rem;
+    font-weight: 1000;
+    text-align: center;
+    text-transform:uppercase;
+    font-family: 'Abel', sans-serif;
+    margin: 0%;
 }
 
 
