@@ -101,8 +101,8 @@ const CreateMatch = () => {
             <MenuItem value={15}>15 minutos</MenuItem>
           </Select>
           <Input className='tamañoTableroInput'
-            min={"8"}
-            max={"50"}
+            min='8'
+            max='50'
             type="number"
             value={match.size.rows}
             placeholder="Tamaño del tablero"

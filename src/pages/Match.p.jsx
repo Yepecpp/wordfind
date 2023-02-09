@@ -90,32 +90,34 @@ const Match = () => {
   };
 
   return (
+    <div className="matchallcontainer">
+
     <Container className='matchContainer'>
       <Box>
         <p className='matchTitle'>Wordfind</p>
       </Box>
        <Box className="preguntasyrespuestas"
        
-      >
+       >
         <Typography variant="h5">Preguntas</Typography>
         {Match.words?.map((word, i) => (
           <Paper className="q_acontainer"
-            key={i}
-            elevation={3}
-            sx={{
+          key={i}
+          elevation={3}
+          sx={{
               margin: '1rem',
               padding: '8px',
               display: "flex",
               flexDirection: "column",
               gap: ".5rem",
-
-            
+              
+              
             }}
-          >
+            >
             <h3><span style={{color: "#1B1B1B", fontWeight: "700", textTransform: "Capitalize" }}>P:   {word.q}</span></h3>
             {word.isGuessed ? (
               <h3> <span  style={{color: "#1B1B1B", fontWeight: "700", fontStyle: "italic", textTransform: "Capitalize" }}>   R: {word.a}</span></h3>
-            ) : null}
+              ) : null}
           </Paper>
         ))}
       </Box>
@@ -142,7 +144,7 @@ const Match = () => {
               margin: '1rem',
             }}
             disabled={Match.finishTime === null}
-          >
+            >
             Empezar
           </Button>
         </>
@@ -153,7 +155,7 @@ const Match = () => {
             setWords={setMatchWords}
             size={Match.size}
             ended={Match.status === 'ended'}
-          />
+            />
           {Match.status !== 'ended' ? (
             <>
               <Button
@@ -161,7 +163,7 @@ const Match = () => {
                   timerHook.pause();
                   EndMatch();
                 }}
-              >
+                >
                 Terminar
               </Button>
             </>
@@ -177,8 +179,10 @@ const Match = () => {
             onClick={ResetMatch}
             sx={{
               margin: '1rem',
+              color: "black"
+
             }}
-          >
+            >
             Reiniciar
           </Button>
         </>
@@ -188,6 +192,7 @@ const Match = () => {
 
       <ExportWords words={Match.words} />
     </Container>
+      </div>
   );
 };
 

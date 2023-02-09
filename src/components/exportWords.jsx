@@ -15,7 +15,9 @@ const exportWords = ({ words }) => {
           onClick={() => ExportWords(words, setExportState)}
           disabled={words.length < 2}
           sx={{
-            ":disabled": {color: "initial"},
+            color: "black",
+            ":disabled": {color: "#c8c8c8"},
+
           }}
           >
           Exportar Palabras{' '}

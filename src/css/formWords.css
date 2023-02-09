@@ -30,6 +30,7 @@
 
 .campoMultilinea{
     width: 20rem;
+    text-transform: capitalize;
 }
 
 .deleteButton{
