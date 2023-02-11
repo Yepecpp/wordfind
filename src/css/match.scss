@@ -1,3 +1,11 @@
+// import rubik font from google fonts
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
 .wordlist-grid {
   display: flex;
   flex-direction: column;
@@ -21,8 +29,7 @@
   list-style: none;
 }
 
-
-.matchTitle{
+.matchTitle {
   font-size: 4rem;
   position: relative;
   left: 50%;
@@ -30,18 +37,17 @@
   margin: 1rem;
   font-family: 'Times New Roman', Times, serif;
   box-shadow: 0px 10px 100px black;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   width: fit-content;
   padding: 10px;
-
 }
-.gameStatus{
+.gameStatus {
   left: 50%;
-  position:relative;
-  transform: translate(-50%,0%);
+  position: relative;
+  transform: translate(-50%, 0%);
   margin: 1rem;
   text-align: center;
-  text-transform:capitalize ;
+  text-transform: capitalize;
 }
 
 .wordlist-cell {
@@ -52,31 +58,29 @@
   border: 1px solid black;
   list-style: none;
   text-align: center;
-  font-weight:500;
-  color: #1B1B1B;
+  font-weight: 500;
+  color: #1b1b1b;
   font-weight: bold;
- 
 }
 .selected {
   background-color: #777777;
   color: #fff;
   font-style: italic;
-
 }
 .found {
   background-color: #14ee14;
   color: #000;
 }
 
-.matchContainer{
+.matchContainer {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   overflow: auto;
 }
 
-.preguntasyrespuestas{
+.preguntasyrespuestas {
   background-color: transparent;
   border: 1px solid #c8c8c8;
   display: flex;
@@ -86,6 +90,4 @@
   align-items: center;
   font-size: 1rem;
   font-weight: 100;
-  
 }
-
