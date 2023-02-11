@@ -19,7 +19,7 @@ import ExportWords from '../components/exportWords';
 import { Replay as ReplayIcon } from '@mui/icons-material';
 import { useMatch } from '../contexts/match';
 import { useEffect, useState } from 'react';
-import "../css/createMatch.css"
+import '../css/createMatch.css';
 const CreateMatch = () => {
   const [match, setMatch] = useMatch();
   const [words, setWords] = useState(match.words);
@@ -79,11 +79,11 @@ const CreateMatch = () => {
 
   return (
     <div className="matchallcontainer">
-
-      <div className='matchContainer'>´
-        <div className='tiempoytamaño'>
-
-          <Select className='uiSelect'
+      <div className="matchContainer">
+        ´
+        <div className="tiempoytamaño">
+          <Select
+            className="uiSelect"
             value={match.finishTime / 60 / 1000}
             onChange={(e) => {
               setMatch({
@@ -100,9 +100,10 @@ const CreateMatch = () => {
             <MenuItem value={10}>10 minutos</MenuItem>
             <MenuItem value={15}>15 minutos</MenuItem>
           </Select>
-          <Input className='tamañoTableroInput'
-            min='8'
-            max='50'
+          <Input
+            className="tamañoTableroInput"
+            min="8"
+            max="50"
             type="number"
             value={match.size.rows}
             placeholder="Tamaño del tablero"
@@ -115,29 +116,27 @@ const CreateMatch = () => {
                 },
               });
             }}
-            error={!match.size.rows ||
+            error={
+              !match.size.rows ||
               !match.size.cols ||
               match.size.rows < match.words.length ||
               match.size.rows < // cant be smaller than the longest word in the list
-              Math.max(...match.words.map((word) => word.a.length))
-             }
+                Math.max(...match.words.map((word) => word.a.length))
+            }
           />
         </div>
-        <p id='tamañoTablero' style={{fontWeight: "800", textTransform: "capitalize"}}>
+        <p
+          id="tamañoTablero"
+          style={{ fontWeight: '800', textTransform: 'capitalize' }}
+        >
           El tamaño del tablero es {match.size.rows}x{match.size.cols}
         </p>
-
         <FormWords words={words} setWords={setWords} />
-        <div className='matchBox'>
-
+        <div className="matchBox">
           {importState.status === 'done' ? (
             <div className="importarexportar">
-              <ExportWords 
-                words={words} />
-              <Button
-                onClick={ImportWords}
-                style={{color: "black"}}
-              >
+              <ExportWords words={words} />
+              <Button onClick={ImportWords} style={{ color: 'black' }}>
                 Importar Palabras{' '}
                 <FileUploadOutlinedIcon
                   sx={{
@@ -147,13 +146,16 @@ const CreateMatch = () => {
               </Button>
             </div>
           ) : importState.status === 'loading' ? (
-            <button className='MatchButton' disabled>{importState.text}</button>
+            <button className="MatchButton" disabled>
+              {importState.text}
+            </button>
           ) : null}
           {importState.status === 'error' ? (
             <Alert severity="error">
               <p>
                 {importState.text}{' '}
-                <button className='MatchButton'
+                <button
+                  className="MatchButton"
                   onClick={() =>
                     setImportState({ status: 'done', text: 'Ready' })
                   }
@@ -166,7 +168,8 @@ const CreateMatch = () => {
             <Alert severity="success">
               <p>
                 {importState.text}{' '}
-                <button className='MatchButton'
+                <button
+                  className="MatchButton"
                   onClick={() =>
                     setImportState({ status: 'done', text: 'Ready' })
                   }
@@ -177,23 +180,22 @@ const CreateMatch = () => {
             </Alert>
           ) : null}
           {!(words.length === 0 || words.length <= 1) &&
-            match.finishTime &&
-            !(
-              !match.size.rows ||
-              !match.size.cols ||
-              match.size.rows < match.words.length ||
-              match.size.rows < // cant be smaller than the longest word in the list
+          match.finishTime &&
+          !(
+            !match.size.rows ||
+            !match.size.cols ||
+            match.size.rows < match.words.length ||
+            match.size.rows < // cant be smaller than the longest word in the list
               Math.max(...match.words.map((word) => word.a.length))
-            ) ? (
+          ) ? (
             <Link to="/match">
-              <button className='createButton'>
+              <button className="createButton">
                 <p>Crear la partida</p>
               </button>
             </Link>
           ) : null}
         </div>
       </div>
-
     </div>
   );
 };

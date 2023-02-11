@@ -44,11 +44,13 @@
     border:  1px #c8c8c8 solid ;
     border-radius: .2rem;
     background-color: transparent;
+    color: #c8c8c8;
+
 }
 
 
 #tamañoTablero{
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: justify;
     margin-bottom: 1rem;
 }
