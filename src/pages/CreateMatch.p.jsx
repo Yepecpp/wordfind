@@ -80,7 +80,6 @@ const CreateMatch = () => {
   return (
     <div className="matchallcontainer">
       <div className="matchContainer">
-        ´
         <div className="tiempoytamaño">
           <Select
             className="uiSelect"

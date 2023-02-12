@@ -1,15 +1,33 @@
   @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-
+  body,
+  html {
+    height: 100%;
+    overflow: auto;
+  }
 .entradaDePalabras{
-    overflow-y: auto;
-    width: 80vw;
-    height: 65vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: safe center;
+    width: 70vw;
+    height: 85vh;
     border: 1px solid #c8c8c8;
     background-color: white;
     border-radius: .2rem;
     padding: 1rem;
-}
 
+}
+.entradaDePalabras> div{
+    margin: 1rem 0rem 1rem 0rem;
+}
+.entradaDePalabras::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+.entradaDePalabras::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
 .preguntaYRespuesta{
     display: flex;
     flex-direction: row;
@@ -23,7 +41,7 @@
     text-align: center;
     text-transform:uppercase;
     font-family: 'Abel', sans-serif;
-    margin: 0%;
+    margin: 1px;
 }
 
 

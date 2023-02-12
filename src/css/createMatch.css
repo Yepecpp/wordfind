@@ -1,6 +1,6 @@
 
 .matchContainer{
-    width: 100vh;
+    width: 100vw;
     height: 100vh;
     position: absolute;
     top: 50%;
@@ -12,7 +12,7 @@
 }
 
 .matchallcontainer{
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
     background-image: url("../assets/background1.svg");
     background-repeat: no-repeat;
