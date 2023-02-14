@@ -171,13 +171,13 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
           </div>
         ))}
       </div>
-      <Typography>
+      <p className='letterIndicator'>
         {ended
           ? 'Game Ended'
           : selected.length > 1
           ? selected.map((s) => s.letter).join('')
           : 'Selecciona una letra y combinala para encontrar la respuesta'}
-      </Typography>
+      </p>
     </div>
   );
 };

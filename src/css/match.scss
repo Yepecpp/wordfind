@@ -12,9 +12,44 @@
   flex-wrap: wrap;
   align-items: center;
   font-size: 1.5em;
-  border: 2px solid #3a3a3a;
+  border: 2rem solid #004cbb;
+  background-color: #6198ff;
   user-select: none;
+  border-radius: .5rem;
+  
+  
 }
+
+.timer{
+  width: 30rem;
+  height: 5rem;
+  padding: 15px;
+  font-size: 2rem;
+  font-weight: 700;
+  background-color: #0059dd;
+  color: #000;
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
+  border-radius: .5rem;
+}
+
+.letterIndicator{
+  width: fit-content;
+  height: 5rem;
+  font-size: 2rem;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
+  margin: 1rem;
+  user-select: none;
+  color: white;
+  background-color: #12113d;
+  border-radius: .5rem;
+  padding: 20px;
+}
+
 .wordlist-row {
   display: flex;
   justify-content: space-around;
@@ -26,6 +61,7 @@
   height: 100%;
   margin: 0;
   padding: 0;
+  
   list-style: none;
 }
 
@@ -55,12 +91,15 @@
   flex: 1;
   margin: 0;
   padding: 0;
-  border: 1px solid black;
+  background-color: #6198ff;
   list-style: none;
   text-align: center;
   font-weight: 500;
   color: #1b1b1b;
   font-weight: bold;
+  font-weight:lighter;
+  color: black;
+ 
 }
 .selected {
   background-color: #777777;
@@ -68,7 +107,7 @@
   font-style: italic;
 }
 .found {
-  background-color: #14ee14;
+  background-color: #89ffbe;
   color: #000;
 }
 
@@ -80,6 +119,7 @@
   overflow: auto;
 }
 
+
 .preguntasyrespuestas {
   background-color: transparent;
   border: 1px solid #c8c8c8;
@@ -90,4 +130,31 @@
   align-items: center;
   font-size: 1rem;
   font-weight: 100;
+}
+
+.matchContainer{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100vw;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size:cover;
+  overflow-y: auto;
+}
+
+
+.matchallcontainer{
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../assets/background1.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size:cover;
+
+
 }
