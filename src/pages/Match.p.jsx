@@ -1,14 +1,16 @@
-import { Container, Box, Button, Typography, Paper } from '@mui/material';
-import { useTimer } from 'react-timer-hook';
-import { useMatch } from '../contexts/match';
-import ExportWords from '../components/exportWords';
-import '../css/match.css';
-import Wordlist from '../components/wordlist';
+import { Container, Box, Button, Typography, Paper } from "@mui/material";
+import { useTimer } from "react-timer-hook";
+import { useMatch } from "../contexts/match";
+import ExportWords from "../components/exportWords";
+import "../css/match.css";
+import Wordlist from "../components/wordlist";
+
 const Match = () => {
   const [Match, setMatch] = useMatch();
+  //console.log(Match);
 
   const EndMatch = () => {
-    if (Match.status !== 'started') {
+    if (Match.status !== "started") {
       return;
     }
     let points = Match.words.filter((word) => word.isGuessed).length * 10;
@@ -19,12 +21,12 @@ const Match = () => {
       percetage <= 25
         ? 100
         : percetage <= 50
-        ? 150
-        : percetage <= 75
-        ? 200
-        : 250;
+          ? 150
+          : percetage <= 75
+            ? 200
+            : 250;
     setMatch({
-      status: 'ended',
+      status: "ended",
       startTime: Match.startTime,
       finishTime: Match.finishTime,
       remaningTime: remaningTime,
@@ -60,7 +62,7 @@ const Match = () => {
     if (!Match.finishTime) return;
     const newMatch = {
       finishTime: Match.finishTime,
-      status: 'started',
+      status: "started",
       startTime: new Date(),
       remaningTime: null,
       points: 0,
@@ -74,7 +76,7 @@ const Match = () => {
 
   const ResetMatch = () => {
     setMatch({
-      status: 'ready',
+      status: "ready",
       points: 0,
       finishTime: Match.finishTime,
       remaningTime: 0,
@@ -92,121 +94,157 @@ const Match = () => {
   return (
     <div className="matchallcontainer">
       <Container className="matchContainer">
-        <Box>
+        <Box marginY={"2rem"}>
           <p className="matchTitle">Wordfind</p>
         </Box>
-        <Box className="preguntasyrespuestas">
-          <Typography variant="h5">Preguntas</Typography>
-          {Match.words?.map((word, i) => (
-            <Paper
-              className="q_acontainer"
-              key={i}
-              elevation={3}
-              sx={{
-                margin: '1rem',
-                padding: '8px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '.5rem',
-              }}
-            >
-              <h3>
-                <span
-                  style={{
-                    color: '#1B1B1B',
-                    fontWeight: '700',
-                    textTransform: 'Capitalize',
-                  }}
-                >
-                  P: {word.q}
-                </span>
-              </h3>
-              {word.isGuessed ? (
+        <Box>
+          <Typography
+            variant="h5"
+            sx={{
+              paddingLeft: "1rem",
+              color: "#1B1B1B",
+              fontWeight: "700",
+            }}
+          >
+            Preguntas:
+          </Typography>
+          <Box className="preguntasyrespuestas">
+            {Match.words?.map((word, i) => (
+              <Paper
+                className="q_acontainer"
+                key={i}
+                elevation={3}
+                sx={{
+                  margin: "1rem",
+                  padding: "8px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: ".5rem",
+                }}
+              >
                 <h3>
-                  {' '}
                   <span
                     style={{
-                      color: '#1B1B1B',
-                      fontWeight: '700',
-                      fontStyle: 'italic',
-                      textTransform: 'Capitalize',
+                      color: "#1B1B1B",
+                      fontWeight: "700",
+                      textTransform: "Capitalize",
                     }}
                   >
-                    {' '}
-                    R: {word.a}
+                    {word.q}
                   </span>
                 </h3>
-              ) : null}
-            </Paper>
-          ))}
+                {word.isGuessed ? (
+                  <h3>
+                    {" "}
+                    <span
+                      style={{
+                        color: "#1B1B1B",
+                        fontWeight: "700",
+                        fontStyle: "italic",
+                        textTransform: "Capitalize",
+                      }}
+                    >
+                      {" "}
+                      R: {word.a}
+                    </span>
+                  </h3>
+                ) : null}
+              </Paper>
+            ))}
+          </Box>
         </Box>
+
         <div className="gameStatus">
           <Typography variant="h6">
-            {Match.status === 'started'
+            {Match.status === "started"
               ? timerHook.minutes > 0
                 ? timerHook.minutes +
-                  ' minutos con ' +
+                  " minutos con " +
                   timerHook.seconds +
-                  ' segundos'
-                : timerHook.seconds + ' segundos'
-              : ' Juego Finalizado'}
+                  " segundos"
+                : timerHook.seconds + " segundos"
+              : Match.status !== "ready"
+                ? " Juego Finalizado"
+                : "Juego Listo"}
           </Typography>
         </div>
-
-        {Match.status === 'ready' ? (
-          <>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={StartMatch}
-              sx={{
-                margin: '1rem',
-              }}
-              disabled={Match.finishTime === null}
-            >
-              Empezar
-            </Button>
-          </>
-        ) : (
-          <>
-            <Wordlist
-              words={Match.words}
-              setWords={setMatchWords}
-              size={Match.size}
-              ended={Match.status === 'ended'}
-            />
-            {Match.status !== 'ended' ? (
+        <Box
+          sx={{
+            marginTop: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            //place them at the end of the container
+            //  justifyContent: 'flex-end',
+            gap: "1rem",
+          }}
+        >
+          <Typography variant="h5" justifyContent={"flex-end"}>
+            Tamaño del tablero: {Match.size.rows}x{Match.size.cols}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              gap: "1rem",
+              alignItems: "center",
+            }}
+          >
+            <ExportWords words={Match.words} />
+            {Match.status === "ready" ? (
               <>
                 <Button
-                  onClick={() => {
-                    timerHook.pause();
-                    EndMatch();
+                  variant="contained"
+                  color="primary"
+                  onClick={StartMatch}
+                  sx={{
+                    margin: "1rem",
+                  }}
+                  disabled={Match.finishTime === null}
+                >
+                  Empezar
+                </Button>
+              </>
+            ) : (
+              <>
+                <Wordlist
+                  words={Match.words}
+                  setWords={setMatchWords}
+                  size={Match.size}
+                  ended={Match.status === "ended"}
+                />
+                {Match.status !== "ended" ? (
+                  <>
+                    <Button
+                      onClick={() => {
+                        timerHook.pause();
+                        EndMatch();
+                      }}
+                    >
+                      Terminar
+                    </Button>
+                  </>
+                ) : null}
+              </>
+            )}
+            {Match.status === "ended" ? (
+              <>
+                <Typography variant="h5">Puntos: {Match.points}</Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={ResetMatch}
+                  sx={{
+                    margin: "1rem",
+                    color: "black",
                   }}
                 >
-                  Terminar
+                  Reiniciar
                 </Button>
               </>
             ) : null}
-          </>
-        )}
-        {Match.status === 'ended' ? (
-          <>
-            <Typography variant="h5">Puntos: {Match.points}</Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={ResetMatch}
-              sx={{
-                margin: '1rem',
-                color: 'black',
-              }}
-            >
-              Reiniciar
-            </Button>
-          </>
-        ) : null}
-
-        <ExportWords words={Match.words} />
+          </Box>
+        </Box>
       </Container>
     </div>
   );

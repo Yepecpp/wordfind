@@ -1,10 +1,10 @@
 // import rubik font from google fonts
-@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 .wordlist-grid {
   display: flex;
@@ -15,12 +15,10 @@
   border: 2rem solid #004cbb;
   background-color: #6198ff;
   user-select: none;
-  border-radius: .5rem;
-  
-  
+  border-radius: 0.5rem;
 }
 
-.timer{
+.timer {
   width: 30rem;
   height: 5rem;
   padding: 15px;
@@ -31,10 +29,10 @@
   position: relative;
   left: 50%;
   transform: translatex(-50%);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
-.letterIndicator{
+.letterIndicator {
   width: fit-content;
   height: 5rem;
   font-size: 2rem;
@@ -46,7 +44,7 @@
   user-select: none;
   color: white;
   background-color: #12113d;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 20px;
 }
 
@@ -61,7 +59,7 @@
   height: 100%;
   margin: 0;
   padding: 0;
-  
+
   list-style: none;
 }
 
@@ -71,7 +69,7 @@
   left: 50%;
   transform: translatex(-50%);
   margin: 1rem;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   box-shadow: 0px 10px 100px black;
   border-radius: 0.2rem;
   width: fit-content;
@@ -97,9 +95,8 @@
   font-weight: 500;
   color: #1b1b1b;
   font-weight: bold;
-  font-weight:lighter;
+  font-weight: lighter;
   color: black;
- 
 }
 .selected {
   background-color: #777777;
@@ -112,17 +109,19 @@
 }
 
 .matchContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 100;
+  justify-content: center;
+  padding: 5rem;
 }
-
 
 .preguntasyrespuestas {
   background-color: transparent;
-  border: 1px solid #c8c8c8;
+  // border: 1px solid #c8c8c8;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -132,29 +131,22 @@
   font-weight: 100;
 }
 
-.matchContainer{
+.matchContainer {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 100vw;
   min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  background-size:cover;
+  background-size: cover;
   overflow-y: auto;
 }
 
-
-.matchallcontainer{
+.matchallcontainer {
   width: 100%;
   min-height: 100vh;
-  background-image: url("../assets/background1.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size:cover;
-
-
+  background-color: #f0f0f028;
 }

@@ -1,8 +1,11 @@
-import propTypes from 'prop-types';
-import { useState, useMemo } from 'react';
-import { Typography } from '@mui/material';
-import '../css/match.css';
-const letters = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+import { useState, useMemo } from "react";
+
+import propTypes from "prop-types";
+
+import "../css/match.css";
+
+const letters = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+
 const Wordlist = ({ words, setWords, size, ended = false }) => {
   const fillGrid = useMemo(() => {
     const retry = 50;
@@ -14,7 +17,7 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
           isWord: false,
           wasFound: false,
         };
-      })
+      }),
     );
     const newWords = words.map((word) => {
       return {
@@ -33,14 +36,14 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
         // if all words are done, and other words are not done, but have 5 tries, then break
         word.try++;
         const wordLength = word.a.length;
-        const wordDirection = Math.random() > 0.5 ? 'horizontal' : 'vertical';
+        const wordDirection = Math.random() > 0.5 ? "horizontal" : "vertical";
         const wordStart = {
           row: Math.floor(Math.random() * size.rows),
           col: Math.floor(Math.random() * size.cols),
         };
         // if word is out of grid, then try again
         // if word is overlapping with other words, then try again, to do this we need to check if word[][].isWord is true
-        if (wordDirection === 'horizontal') {
+        if (wordDirection === "horizontal") {
           if (wordStart.col + wordLength > size.cols) return;
           for (let i = 0; i < wordLength; i++) {
             if (newGrid[wordStart.row][wordStart.col + i].isWord) {
@@ -48,7 +51,7 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
             }
           }
         }
-        if (wordDirection === 'vertical') {
+        if (wordDirection === "vertical") {
           if (wordStart.row + wordLength > size.rows) return;
           for (let i = 0; i < wordLength; i++) {
             if (newGrid[wordStart.row + i][wordStart.col].isWord) {
@@ -58,9 +61,9 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
         }
         for (let i = 0; i < wordLength; i++) {
           const row =
-            wordDirection === 'horizontal' ? wordStart.row : wordStart.row + i;
+            wordDirection === "horizontal" ? wordStart.row : wordStart.row + i;
           const col =
-            wordDirection === 'horizontal' ? wordStart.col + i : wordStart.col;
+            wordDirection === "horizontal" ? wordStart.col + i : wordStart.col;
           newGrid[row][col].letter = word.a[i];
           newGrid[row][col].isWord = true;
         }
@@ -82,7 +85,7 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
     {
       row: 0,
       col: 0,
-      letter: '',
+      letter: "",
       wasFound: false,
     },
   ]);
@@ -91,14 +94,14 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
     SetSelected(newSelected);
     // check if newSelected[].wasFound is true, if true, then return
     if (newSelected.some((s) => s.wasFound)) return;
-    const word = newSelected.map((s) => s.letter).join('');
+    const word = newSelected.map((s) => s.letter).join("");
     const foundWord = words.find(
-      (w) => w.a.toLowerCase() === word.toLowerCase()
+      (w) => w.a.toLowerCase() === word.toLowerCase(),
     );
     if (!foundWord) return;
     const newWords = words;
     const index = newWords.findIndex(
-      (w) => !w.isGuessed && w.a.toLowerCase() === word.toLowerCase()
+      (w) => !w.isGuessed && w.a.toLowerCase() === word.toLowerCase(),
     );
     if (index === -1) return;
     newWords[index].isGuessed = true;
@@ -119,8 +122,8 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
           <div className="wordlist-row" key={i}>
             {row.map((col, j) => (
               <div
-                className={`wordlist-cell ${col.isSelected ? 'selected' : ''} ${
-                  col.wasFound || (col.isWord && ended) ? 'found' : ''
+                className={`wordlist-cell ${col.isSelected ? "selected" : ""} ${
+                  col.wasFound || (col.isWord && ended) ? "found" : ""
                 }`}
                 key={j}
                 onMouseDown={(e) => {
@@ -128,7 +131,7 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
                   setGrid(() => {
                     const newGrid = [...grid];
                     selected.forEach(
-                      (s) => (newGrid[s.row][s.col].isSelected = false)
+                      (s) => (newGrid[s.row][s.col].isSelected = false),
                     );
                     return newGrid;
                   });
@@ -171,12 +174,12 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
           </div>
         ))}
       </div>
-      <p className='letterIndicator'>
+      <p className="letterIndicator">
         {ended
-          ? 'Game Ended'
+          ? "Game Ended"
           : selected.length > 1
-          ? selected.map((s) => s.letter).join('')
-          : 'Selecciona una letra y combinala para encontrar la respuesta'}
+            ? selected.map((s) => s.letter).join("")
+            : "Selecciona una letra y combinala para encontrar la respuesta"}
       </p>
     </div>
   );
@@ -190,4 +193,5 @@ Wordlist.propTypes = {
     cols: propTypes.number.isRequired,
   }).isRequired,
 };
+
 export default Wordlist;

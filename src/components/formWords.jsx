@@ -1,26 +1,29 @@
-import { Box, TextField, Button } from '@mui/material';
-import { Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
-import propTypes from 'prop-types';
-import { Formik, useFormik } from 'formik';
-import * as yup from 'yup';
-import { useEffect } from 'react';
-import '../css/formWords.css';
+import { useEffect } from "react";
+import * as yup from "yup";
+import propTypes from "prop-types";
+
+import { Delete as DeleteIcon, Add as AddIcon } from "@mui/icons-material";
+import { Box, TextField, Button } from "@mui/material";
+import { Formik, useFormik } from "formik";
+
+import "../css/formWords.css";
+
 const validationSchema = yup.array(
   yup.object().shape({
     q: yup
       .string()
-      .min(1, 'Ingrese una pregunta')
-      .required('Ingrese una pregunta'),
+      .min(1, "Ingrese una pregunta")
+      .required("Ingrese una pregunta"),
     // a cant be empty or have spaces or special characters
     a: yup
       .string()
-      .min(1, 'Ingrese una respuesta')
+      .min(1, "Ingrese una respuesta")
       .matches(
         /^[a-zA-Z0-9]+$/,
-        'La respuesta no puede tener espacios ni caracteres especiales'
+        "La respuesta no puede tener espacios ni caracteres especiales",
       )
-      .required('Ingrese una respuesta'),
-  })
+      .required("Ingrese una respuesta"),
+  }),
 );
 const formWords = ({ words, setWords }) => {
   const formikHook = useFormik({
@@ -65,7 +68,7 @@ const formWords = ({ words, setWords }) => {
                 name={`[${index}].q`}
                 onBlur={formikHook.handleBlur}
                 placeholder={
-                  '¿Como se apellidaba el dictador que goberno del 1930 al 1961?'
+                  "¿Como se apellidaba el dictador que goberno del 1930 al 1961?"
                 }
                 error={
                   formikHook.touched[index]?.q && formikHook.errors[index]?.q
@@ -83,7 +86,7 @@ const formWords = ({ words, setWords }) => {
                 multiline
                 maxRows={4}
                 onChange={formikHook.handleChange}
-                placeholder={'Trujillo'}
+                placeholder={"Trujillo"}
                 name={`[${index}].a`}
                 onBlur={formikHook.handleBlur}
                 error={
@@ -102,7 +105,7 @@ const formWords = ({ words, setWords }) => {
               variant="contained"
               onClick={() => {
                 const newWords = [...formikHook.values];
-                newWords.push({ q: '', a: '' });
+                newWords.push({ q: "", a: "" });
                 formikHook.setValues(newWords);
               }}
             >
@@ -122,8 +125,10 @@ const formWords = ({ words, setWords }) => {
     </Formik>
   );
 };
+
 formWords.propTypes = {
   words: propTypes.array.isRequired,
   setWords: propTypes.func.isRequired,
 };
+
 export default formWords;

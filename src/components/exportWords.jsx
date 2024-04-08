@@ -1,41 +1,42 @@
-import propTypes from 'prop-types';
-import { Box, Button, Typography } from '@mui/material';
-import { useState } from 'react';
-import { DownloadBlob, ExportWords } from '../utils/exportwords';
-import {
-  Delete as DeleteIcon,
-} from '@mui/icons-material';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import { useState } from "react";
+import propTypes from "prop-types";
+
+import { Delete as DeleteIcon } from "@mui/icons-material";
+import { Box, Button } from "@mui/material";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+
+import { DownloadBlob, ExportWords } from "../utils/exportwords";
+
 const exportWords = ({ words }) => {
-  const [exportState, setExportState] = useState('done');
+  const [exportState, setExportState] = useState("done");
   return (
     <Box>
-      {exportState === 'done' ? (
-        <Button className='export'
+      {exportState === "done" ? (
+        <Button
+          className="export"
           onClick={() => ExportWords(words, setExportState)}
           disabled={words.length < 2}
           sx={{
             color: "black",
-            ":disabled": {color: "#c8c8c8"},
-
+            ":disabled": { color: "#c8c8c8" },
           }}
-          >
-          Exportar Palabras{' '}
+        >
+          Exportar Palabras{" "}
           <FileDownloadOutlinedIcon
             sx={{
               ml: 1,
             }}
           />
         </Button>
-      ) : exportState === 'loading' ? (
+      ) : exportState === "loading" ? (
         <Button disabled>Exportando...</Button>
       ) : null}
-      {exportState.includes(',') ? (
+      {exportState.includes(",") ? (
         <>
           <Button onClick={() => DownloadBlob(exportState, setExportState)}>
             Descargar archivo
           </Button>
-          <Button onClick={() => setExportState('done')}>
+          <Button onClick={() => setExportState("done")}>
             <DeleteIcon />
           </Button>
         </>
@@ -46,4 +47,5 @@ const exportWords = ({ words }) => {
 exportWords.propTypes = {
   words: propTypes.arrayOf(propTypes.object).isRequired,
 };
+
 export default exportWords;

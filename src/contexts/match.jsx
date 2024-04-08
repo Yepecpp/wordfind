@@ -1,12 +1,15 @@
-import { createContext, useContext, useState } from 'react';
-import propTypes from 'prop-types';
+import { createContext, useContext, useState } from "react";
+import propTypes from "prop-types";
+
 const matchContext = createContext();
+
 export const useMatch = () => {
   return useContext(matchContext);
 };
+
 export const MatchProvider = ({ children }) => {
   const [match, setMacth] = useState({
-    status: 'ready',
+    status: "ready",
     points: 0,
     remaningTime: 0,
     finishTime: 1 * 60 * 1000,
@@ -17,8 +20,8 @@ export const MatchProvider = ({ children }) => {
     },
     words: [
       {
-        q: '',
-        a: '',
+        q: "",
+        a: "",
       },
     ],
   });

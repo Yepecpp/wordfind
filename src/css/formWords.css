@@ -1,76 +1,69 @@
-  @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-  body,
-  html {
-    height: 100%;
-    overflow: auto;
-  }
-.entradaDePalabras{
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: safe center;
-    width: 70vw;
-    height: 85vh;
-    border: 1px solid #c8c8c8;
-    background-color: white;
-    border-radius: .2rem;
-    padding: 1rem;
-
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+body,
+html {
+  height: 100%;
+  overflow: auto;
 }
-.entradaDePalabras> div{
-    margin: 1rem 0rem 1rem 0rem;
+.entradaDePalabras {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+  width: 70vw;
+  height: 85vh;
+  border: 1px solid #c8c8c8;
+  background-color: white;
+  border-radius: 0.2rem;
+  padding: 1rem;
+}
+.entradaDePalabras > div {
+  margin: 1rem 0rem 1rem 0rem;
 }
 .entradaDePalabras::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 .entradaDePalabras::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
 }
-.preguntaYRespuesta{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    margin: 1rem 1rem 1rem .5rem;
-
+.preguntaYRespuesta {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 1rem 1rem 1rem 0.5rem;
 }
-.plb{
-    font-size: 3rem;
-    font-weight: 1000;
-    text-align: center;
-    text-transform:uppercase;
-    font-family: 'Abel', sans-serif;
-    margin: 1px;
-}
-
-
-
-.campoMultilinea{
-    width: 20rem;
-    text-transform: capitalize;
+.plb {
+  font-size: 3rem;
+  font-weight: 1000;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Abel", sans-serif;
+  margin: 1px;
 }
 
-.deleteButton{
-    width: 1rem;
-    height: 3.5rem;
-    align-self: center;
-    
+.campoMultilinea {
+  width: 20rem;
+  text-transform: capitalize;
 }
 
-
-
-.PREncabezado{
-    margin: 1rem 0rem .5rem 9rem;
-    display: flex;
-    flex-direction: row;
-    gap: 9rem;
-    text-align: center;
+.deleteButton {
+  width: 1rem;
+  height: 3.5rem;
+  align-self: center;
 }
 
-.masYGuardar{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    margin-top:1rem ;
+.PREncabezado {
+  margin: 1rem 0rem 0.5rem 9rem;
+  display: flex;
+  flex-direction: row;
+  gap: 9rem;
+  text-align: center;
+}
+
+.masYGuardar {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
 }
