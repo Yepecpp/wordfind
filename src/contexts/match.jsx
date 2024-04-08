@@ -12,8 +12,8 @@ export const MatchProvider = ({ children }) => {
     finishTime: 1 * 60 * 1000,
     startTime: null,
     size: {
-      rows: 4,
-      cols: 4,
+      rows: 8,
+      cols: 8,
     },
     words: [
       {

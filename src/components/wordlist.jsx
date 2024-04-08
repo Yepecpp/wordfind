@@ -1,7 +1,8 @@
 import propTypes from 'prop-types';
 import { useState, useMemo } from 'react';
 import { Typography } from '@mui/material';
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+import '../css/match.css';
+const letters = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
 const Wordlist = ({ words, setWords, size, ended = false }) => {
   const fillGrid = useMemo(() => {
     const retry = 50;
@@ -170,13 +171,13 @@ const Wordlist = ({ words, setWords, size, ended = false }) => {
           </div>
         ))}
       </div>
-      <Typography>
+      <p className='letterIndicator'>
         {ended
           ? 'Game Ended'
           : selected.length > 1
           ? selected.map((s) => s.letter).join('')
-          : 'Select a word from the list to find it in the grid'}
-      </Typography>
+          : 'Selecciona una letra y combinala para encontrar la respuesta'}
+      </p>
     </div>
   );
 };

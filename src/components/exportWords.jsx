@@ -3,20 +3,25 @@ import { Box, Button, Typography } from '@mui/material';
 import { useState } from 'react';
 import { DownloadBlob, ExportWords } from '../utils/exportwords';
 import {
-  SaveAlt as SaveAltIcon,
   Delete as DeleteIcon,
 } from '@mui/icons-material';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 const exportWords = ({ words }) => {
   const [exportState, setExportState] = useState('done');
   return (
     <Box>
       {exportState === 'done' ? (
-        <Button
+        <Button className='export'
           onClick={() => ExportWords(words, setExportState)}
           disabled={words.length < 2}
-        >
+          sx={{
+            color: "black",
+            ":disabled": {color: "#c8c8c8"},
+
+          }}
+          >
           Exportar Palabras{' '}
-          <SaveAltIcon
+          <FileDownloadOutlinedIcon
             sx={{
               ml: 1,
             }}

@@ -1,0 +1,65 @@
+
+.matchContainer{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items:center ;
+    display: flex;
+    flex-direction:column ;
+}
+
+.matchallcontainer{
+    width: 100vw;
+    min-height: 100vh;
+    background-image: url("../assets/background1.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.tiempoytamaño{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.uiSelect{
+    width: 8rem;
+    height: 2rem;
+    align-self: center;
+}
+
+
+.tamañoTableroInput{
+    width: 5rem;
+    padding: 8px;
+    height: 2rem;
+    font-weight: 750;
+    text-align: center;
+    font-size: 1rem;
+    margin: 2rem;
+    border:  1px #c8c8c8 solid ;
+    border-radius: .2rem;
+    background-color: transparent;
+    color: #c8c8c8;
+
+}
+
+
+#tamañoTablero{
+    font-size: 1.5em;
+    text-align: justify;
+    margin-bottom: 1rem;
+}
+
+.importarexportar{
+    display: flex;
+    
+}
+
+
+
+    

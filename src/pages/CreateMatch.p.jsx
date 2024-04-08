@@ -8,12 +8,18 @@ import {
   MenuItem,
   Input,
 } from '@mui/material';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import {
+  SaveAlt as SaveAltIcon,
+  Delete as DeleteIcon,
+} from '@mui/icons-material';
 import FormWords from '../components/formWords';
 import { Link } from 'react-router-dom';
 import ExportWords from '../components/exportWords';
 import { Replay as ReplayIcon } from '@mui/icons-material';
 import { useMatch } from '../contexts/match';
 import { useEffect, useState } from 'react';
+import '../css/createMatch.css';
 const CreateMatch = () => {
   const [match, setMatch] = useMatch();
   const [words, setWords] = useState(match.words);
@@ -72,98 +78,124 @@ const CreateMatch = () => {
   };
 
   return (
-    <Container>
-      <Select
-        value={match.finishTime / 60 / 1000}
-        onChange={(e) => {
-          setMatch({
-            ...match,
-            finishTime: e.target.value * 60 * 1000,
-          });
-        }}
-        error={!match.finishTime}
-      >
-        <MenuItem value={1}>1 minuto</MenuItem>
-        <MenuItem value={2}>2 minutos</MenuItem>
-        <MenuItem value={3}>3 minutos</MenuItem>
-        <MenuItem value={5}>5 minutos</MenuItem>
-        <MenuItem value={10}>10 minutos</MenuItem>
-        <MenuItem value={15}>15 minutos</MenuItem>
-      </Select>
-      <Input
-        type="number"
-        value={match.size.rows}
-        placeholder="Tamaño del tablero"
-        onChange={(e) => {
-          setMatch({
-            ...match,
-            size: {
-              cols: Number(e.target.value),
-              rows: Number(e.target.value),
-            },
-          });
-        }}
-        error={
-          !match.size.rows ||
-          !match.size.cols ||
-          match.size.rows < match.words.length ||
-          match.size.rows < // cant be smaller than the longest word in the list
-            Math.max(...match.words.map((word) => word.q.length))
-        }
-      />
-      <Typography>
-        El tamaño del tablero es {match.size.rows}x{match.size.cols}
-      </Typography>
-      <FormWords words={words} setWords={setWords} />
-      <ExportWords words={words} />
-      <Box>
-        {importState.status === 'done' ? (
-          <Button onClick={ImportWords}>Importar palabras</Button>
-        ) : importState.status === 'loading' ? (
-          <Button disabled>{importState.text}</Button>
-        ) : null}
-        {importState.status === 'error' ? (
-          <Alert severity="error">
-            <Typography>
-              {importState.text}{' '}
-              <Button
-                onClick={() =>
-                  setImportState({ status: 'done', text: 'Ready' })
-                }
-              >
-                <ReplayIcon />
+    <div className="matchallcontainer">
+      <div className="matchContainer">
+        <div className="tiempoytamaño">
+          <Select
+            className="uiSelect"
+            value={match.finishTime / 60 / 1000}
+            onChange={(e) => {
+              setMatch({
+                ...match,
+                finishTime: e.target.value * 60 * 1000,
+              });
+            }}
+            error={!match.finishTime}
+          >
+            <MenuItem value={1}>1 minuto</MenuItem>
+            <MenuItem value={2}>2 minutos</MenuItem>
+            <MenuItem value={3}>3 minutos</MenuItem>
+            <MenuItem value={5}>5 minutos</MenuItem>
+            <MenuItem value={10}>10 minutos</MenuItem>
+            <MenuItem value={15}>15 minutos</MenuItem>
+          </Select>
+          <Input
+            className="tamañoTableroInput"
+            min="8"
+            max="50"
+            type="number"
+            value={match.size.rows}
+            placeholder="Tamaño del tablero"
+            onChange={(e) => {
+              setMatch({
+                ...match,
+                size: {
+                  cols: Number(e.target.value),
+                  rows: Number(e.target.value),
+                },
+              });
+            }}
+            error={
+              !match.size.rows ||
+              !match.size.cols ||
+              match.size.rows < match.words.length ||
+              match.size.rows < // cant be smaller than the longest word in the list
+                Math.max(...match.words.map((word) => word.a.length))
+            }
+          />
+        </div>
+        <p
+          id="tamañoTablero"
+          style={{ fontWeight: '800', textTransform: 'capitalize' }}
+        >
+          El tamaño del tablero es {match.size.rows}x{match.size.cols}
+        </p>
+        <FormWords words={words} setWords={setWords} />
+        <div className="matchBox">
+          {importState.status === 'done' ? (
+            <div className="importarexportar">
+              <ExportWords words={words} />
+              <Button onClick={ImportWords} style={{ color: 'black' }}>
+                Importar Palabras{' '}
+                <FileUploadOutlinedIcon
+                  sx={{
+                    ml: 1,
+                  }}
+                />
               </Button>
-            </Typography>
-          </Alert>
-        ) : importState.status === 'completed' ? (
-          <Alert severity="success">
-            <Typography>
-              {importState.text}{' '}
-              <Button
-                onClick={() =>
-                  setImportState({ status: 'done', text: 'Ready' })
-                }
-              >
-                <ReplayIcon />
-              </Button>
-            </Typography>
-          </Alert>
-        ) : null}
-        {!(words.length === 0 || words.length <= 1) &&
-        match.finishTime &&
-        !(
-          !match.size.rows ||
-          !match.size.cols ||
-          match.size.rows < match.words.length ||
-          match.size.rows < // cant be smaller than the longest word in the list
-            Math.max(...match.words.map((word) => word.q.length))
-        ) ? (
-          <Button component={Link} to="/match">
-            <Typography>Crear la partida</Typography>
-          </Button>
-        ) : null}
-      </Box>
-    </Container>
+            </div>
+          ) : importState.status === 'loading' ? (
+            <button className="MatchButton" disabled>
+              {importState.text}
+            </button>
+          ) : null}
+          {importState.status === 'error' ? (
+            <Alert severity="error">
+              <p>
+                {importState.text}{' '}
+                <button
+                  className="MatchButton"
+                  onClick={() =>
+                    setImportState({ status: 'done', text: 'Ready' })
+                  }
+                >
+                  <ReplayIcon />
+                </button>
+              </p>
+            </Alert>
+          ) : importState.status === 'completed' ? (
+            <Alert severity="success">
+              <p>
+                {importState.text}{' '}
+                <button
+                  className="MatchButton"
+                  onClick={() =>
+                    setImportState({ status: 'done', text: 'Ready' })
+                  }
+                >
+                  <ReplayIcon />
+                </button>
+              </p>
+            </Alert>
+          ) : null}
+          {!(words.length === 0 || words.length <= 1) &&
+          match.finishTime &&
+          !(
+            !match.size.rows ||
+            !match.size.cols ||
+            match.size.rows < match.words.length ||
+            match.size.rows < // cant be smaller than the longest word in the list
+              Math.max(...match.words.map((word) => word.a.length))
+          ) ? (
+            <Link to="/match">
+              <button className="createButton">
+                <p>Crear la partida</p>
+              </button>
+            </Link>
+          ) : null}
+        </div>
+      </div>
+    </div>
   );
 };
 

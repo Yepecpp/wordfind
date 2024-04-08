@@ -1,14 +1,13 @@
 import { Container, Box, Typography } from '@mui/material';
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 const NoPage = () => {
-  return (
-    <Container>
-      <Box>
-        <Typography variant="h1">404 no page</Typography>
-      </Box>
-    </Container>
-  );
+  const navigate = useNavigate()
+  useEffect(()=>{
+
+    navigate("/")
+  })
+
 };
 
 export default NoPage;
